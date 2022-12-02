@@ -124,6 +124,19 @@ static inline char Parser_current(Parser *parser)
     return parser->data[parser->from];
 }
 
+static inline char Parser_getChar(Parser *parser)
+{
+    if (Parser_isDone(parser)) {
+        return '0';
+    }
+
+    size_t from = parser->from;
+    parser->from++;
+    parser->to = parser->from;
+
+    return parser->data[from];
+}
+
 static inline char *Parser_ptr(Parser *parser)
 {
     return &parser->data[parser->from];
